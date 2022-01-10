@@ -19,4 +19,5 @@ public class GenericsClassTest {
         System.out.println("不传泛型测试，noGenericsDouble key is:"+(double)noGenericsDouble.getKey());
 
     }
+
 }

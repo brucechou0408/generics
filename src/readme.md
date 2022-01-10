@@ -6,13 +6,13 @@
 只在编译阶段生效。见[Demo1](./com/bruce/generics/demo1/Demo.java)。
 可见在程序编译后，会采取去泛型化的操作，泛型只在编译阶段生效，在编译阶段后会去除相关的信息，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法（可以参考如下的图片[demo1](./resources/demo1.png)）。
 # 3、泛型的使用
-泛型有三种使用方式，分别为泛型类、泛型接口、泛型方法。f
+泛型有三种使用方式，分别为泛型类、泛型接口、泛型方法。
 ## 3.1 泛型类
 泛型类型用于类的定义中，被称为泛型类。通过泛型可以完成对一组类的操作对外开放相同的接口。最典型的就是各种容器类，如：List、Set、Map。
-```aidl
-class 类名称 <泛型标识>{
-    private 泛型标识 变量；
-}
+```
+    public class 类名称 <泛型标识>{
+        private 泛型标识 变量；
+    }
 ```
 示例
 
@@ -32,5 +32,25 @@ boolean flag = ex instanceof GenericsClass<Number>;
 ```
 ## 3.2 泛型接口
 泛型接口与泛型类的定义及使用基本相同。泛型接口常被用在各种类的生产器中，可以看一个例子：
-
+[泛型接口类](./com/bruce/generics/demo3/GenericsInterface.java)
+[泛型接口有泛型参数实现类](./com/bruce/generics/demo3/GenericsImplementOfGenericsParams.java)
+[泛型接口无泛型参数实现类](./com/bruce/generics/demo3/GenericsImplementOfNoGenericsParams.java)
+## 3.3 泛型方法
+java中泛型类的定义比较简单，但是泛型方法比较复杂。
+下面是一个泛型方法的示例
+[泛型方法](./com/bruce/generics/demo4/GenericsMethod.java)
+# 4 泛型通配符
+我们知道Integer是Number的子类，那么在是在使用GenericsClass<Number>作为形参的方法中，可不可以使用GenericsClass<Integer>作为参数传入呢？
+```
+ public static void use(GenericsClass<Number> obj) {}
+ public static void main(){
+    use(new GenericsImplementOfNoGenericsParams<Integer>());
+ }
+```
+可以看出，是不能的。由此可以看出，不同类型的泛型是不可以互相转换的，
+但是实际运用的时候，我们不会给每个实现类都定义一个方法。于是类型通配符诞生了。我们可以修改use方法
+```
+    public static void use(GenericsClass<?> obj){}
+```
+此处的'?'是类型的实参， 不是类型形参，只使用Object中的功能时，可以通过?通配符来表示未知类型。
 
