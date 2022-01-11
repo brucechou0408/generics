@@ -2,9 +2,10 @@ package com.bruce.generics.demo3;
 
 /**
  * 实现泛型接口，未传入泛型实参
+ *
  * @author bruce
  */
-public class GenericsImplementOfNoGenericsParams<T> implements GenericsInterface<T>{
+public class GenericsImplementOfNoGenericsParams<T> implements GenericsInterface<T> {
     @Override
     public T next() {
         return null;
